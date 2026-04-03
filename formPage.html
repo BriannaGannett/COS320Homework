@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- allows for flexible layout-->
+    
+    <title>Semantic HTML5 Registration</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main>
+        <form id="registrationForm" action="/submit" method="POST" novalidate>
+        
+        <!-- novalidate says override to JS based validation, not browser default.
+        action = submit pretends to work
+        Post wraps as a package, GET appends into url -->
+        
+            <header>
+                <h2>Create Account</h2>
+                <p>Please fill out the details below to register.</p>
+            </header>
+
+            <fieldset> <!-- gold standard now, use to show groupings of data in a form -->
+            
+                <legend>Identity</legend>
+                <div class="identity-fields">
+                <p>
+                
+                <!-- link for to the id of the input -->
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required minlength="3" autofocus>
+               <!-- autofocus means start cursor here -->     
+                    
+                    <span class="error-message" id="username-error" aria-live="polite"></span>
+                    <!-- Aria-live is a screenreader setting
+                    allows for accessibility (A11Y) and if set to Polite then it waits for user to complete typing etc, if assertive it's for critital warnings-->
+                    
+                </p>
+
+                <p>
+                    <label for="user-email">Email Address</label>
+                    <input type="email" id="user-email" name="user_email" required>
+                    
+                    <!-- email will default look for @ -->
+                    <span class="error-message" id="email-error" aria-live="polite"></span>
+                    
+                    
+                </p>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Security</legend>
+                
+                <p>
+                    <label for="pwd">Password</label>
+                    <span class="input-container">
+                       
+                       
+                       <!-- regex is a regular expression
+                       set up an expected pattern
+                       setting to type=password will mask characters by browser default  -->
+                       
+                        <input type="password" id="pwd" name="pwd" 
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required 
+                               aria-describedby="password-requirements">
+                        <button type="button" class="toggle-password" data-target="pwd">Show</button>
+                    </span>
+                    
+                    <progress id="strength-meter" value="0" max="4"></progress>
+                    <small id="strength-text">Strength: Very Weak</small>
+
+                    <ul id="password-requirements" class="checklist">
+                        <li id="req-length" class="invalid">At least 8 characters</li>
+                        <li id="req-number" class="invalid">At least one number</li>
+                        <li id="req-lowercase" class="invalid">One lowercase letter</li>
+                        <li id="req-uppercase" class="invalid">One uppercase letter</li>
+                    </ul>
+                    <span class="error-message" id="pwd-error" aria-live="polite"></span>
+                </p>
+
+                <p>
+                    <label for="pwd-confirm">Confirm Password</label>
+                    <span class="input-container">
+                        <input type="password" id="pwd-confirm" name="pwd_confirm" required>
+                        <button type="button" class="toggle-password" data-target="pwd-confirm">Show</button>
+                    </span>
+                    <span class="error-message" id="pwd-confirm-error" aria-live="polite"></span>
+                </p>
+            </fieldset>
+
+            <fieldset>
+                <legend>Preferences</legend>
+                <p>
+                    <label for="framework">Favorite Framework</label>
+                    <!-- 
+                    set up a list of suggested data to populate the data box or allow typing for other, thus it's a combobox
+                     -->
+            <input type="text" id="framework"
+             name="framework" 
+             list="framework-options" 
+             placeholder="Start typing..."
+             role="combobox" 
+             aria-autocomplete="list">
+                    <datalist id="framework-options">
+                        <option value="React">
+                        <option value="Vue.js">
+                        <option value="Angular">
+                        <option value="Svelte">
+                    </datalist>
+                </p>
+
+                <p>
+                    <label for="theme-color">Profile Color</label>
+                    <input type="color" id="theme-color" name="fav_color" value="#3498db">
+                </p>
+            </fieldset>
+
+            <section class="button-group">
+                <button type="reset" id="resetBtn"> Clear Form</button>
+            <button type="submit" id="submitBtn"> Register</button>
+            <!-- setting for default button actions -->
+            
+            </section>
+        </form>
+    </main>
+
+    <script src="scriptForm.js"></script>
+</body>
+</html>
+
+<!-- This is a Regular Expression (Regex). It acts as a "gatekeeper" that the input must pass before the form can be submitted. Here is exactly what this specific pattern is demanding:
+
+    (?=.*\d): Must contain at least one number.
+
+    (?=.*[a-z]): Must contain at least one lowercase letter.
+
+    (?=.*[A-Z]): Must contain at least one uppercase letter.
+
+    .{8,}: Must be at least 8 characters long.
+
+3. aria-describedby="password-requirements"
+
+Since the pattern attribute doesn't automatically tell the user why their password is being rejected, you need a text element (like a <div> or <ul>) elsewhere on the page that lists these rules.
+
+    The Link: This attribute tells screen readers to read the content of the element with id="password-requirements" as soon as the user focuses on this password box.
+
+    The Goal: It ensures the user knows the rules before they start typing, rather than guessing why the form keeps failing. 
+    ------------
+    The "magic" happens between the list attribute and the id of the datalist.
+
+    list="framework-options": This tells the browser, "Don't just treat this as a blank text box; look for a <datalist> with the ID framework-options and use its values as suggestions."
+
+    id="framework-options": This acts as the anchor that the input is looking for.
+
+Key Attributes
+
+    placeholder="Start typing...": This provides a "hint" to the user. It disappears as soon as the user starts typing. It's great for UX, but remember: a placeholder is not a replacement for a label.
+
+    id="framework" vs name="framework":
+
+        The id connects to the <label for="framework">.
+
+        The name is what the server will see (e.g., framework=React).
+
+    <option value="...">: These are the specific strings that will filter as the user types.
+    
+    
+    
+    -->
