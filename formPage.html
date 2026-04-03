@@ -44,7 +44,7 @@
                     <input type="email" id="user-email" name="user_email" required>
                     
                     <!-- email will default look for @ -->
-                    <span class="error-message" id="email-error" aria-live="polite"></span>
+                    <span class="error-message" id="user-email-error" aria-live="polite"></span>
                     
                     
                 </p>
@@ -103,7 +103,8 @@
              list="framework-options" 
              placeholder="Start typing..."
              role="combobox" 
-             aria-autocomplete="list">
+             aria-autocomplete="list"
+             required>
                     <datalist id="framework-options">
                         <option value="React">
                         <option value="Vue.js">

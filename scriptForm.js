@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Element Selectors
     const form = document.getElementById('registrationForm');
+    const usernameInput = document.getElementById('username');
     const pwdInput = document.getElementById('pwd');
     const confirmPwdInput = document.getElementById('pwd-confirm');
     const meter = document.getElementById('strength-meter');
@@ -25,6 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
      * 2. Password Match Validation
      * Uses the Constraint Validation API to set custom error messages.
      */
+
+    usernameInput.addEventListener('input', () => {
+        const taken = ["admin", "user", "test"];
+        const isMatch = taken.includes(usernameInput.value.toLowerCase());
+        if (isMatch && usernameInput.value !== "") {
+            usernameInput.setCustomValidity("Username is already taken");
+        } else {
+            usernameInput.setCustomValidity("");
+        }
+    });
+
     function validateMatch() {
         const isMatch = pwdInput.value === confirmPwdInput.value;
         if (!isMatch && confirmPwdInput.value !== "") {
@@ -33,6 +45,8 @@ document.addEventListener('DOMContentLoaded', () => {
             confirmPwdInput.setCustomValidity("");
         }
     }
+
+    
 
     /**
      * 3. Password Strength, Checklist, and Character Counter
@@ -94,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
      * Provides instant visual feedback when a user leaves a field.
      */
     allInputs.forEach(input => {
-        input.addEventListener('blur', () => {
+        input.addEventListener('input', () => {
             const errorSpan = document.getElementById(`${input.id}-error`);
             const isValid = input.checkValidity();
             
