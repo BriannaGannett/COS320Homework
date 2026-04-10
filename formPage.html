@@ -35,8 +35,7 @@
                     
                     <span class="error-message" id="username-error" aria-live="polite"></span>
                     <!-- Aria-live is a screenreader setting
-                    allows for accessibility (A11Y) and if set to Polite then it waits for user to complete typing etc, if assertive it's for critital warnings-->
-                    
+                    allows for accessibility (A11Y) and if set to Polite then it waits for user to complete typing etc, if assertive it's for critital warnings-->  
                 </p>
 
                 <p>
@@ -44,9 +43,16 @@
                     <input type="email" id="user-email" name="user_email" required>
                     
                     <!-- email will default look for @ -->
-                    <span class="error-message" id="user-email-error" aria-live="polite"></span>
+                    <span class="error-message" id="user-email-error" aria-live="polite"></span>    
+                </p>
+
+                <p>
+                    <label for="phone-number">Phone Number</label>
+                    <input type="phone-number" id="phone-number" name="phone-number" 
+                        pattern="^\(?([0-9]{3})\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$" 
+                        aria-describedby="phone-number-requirements" required>
                     
-                    
+                    <span class="error-message" id="phone-number-error" aria-live="polite"></span>    
                 </p>
                 </div>
             </fieldset>

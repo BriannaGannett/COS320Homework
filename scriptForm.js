@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const meter = document.getElementById('strength-meter');
     const strengthText = document.getElementById('strength-text');
     const submitBtn = document.getElementById('submitBtn');
+    const phoneNum = document.getElementById('phone-number');
     
     // Create the character counter element dynamically (or select if in HTML)
     // We will place it near the strength text
@@ -46,7 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    
+    phoneNum.addEventListener('input', () => {
+        const val = phoneNum.value;
+        const pattern = /^\(?([0-9]{3})\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$/;
+        
+        if (!pattern.test(val)) {
+            phoneNum.setCustomValidity("Invalid phone number.");
+        } else {
+            phoneNum.setCustomValidity("");
+        }
+    });
 
     /**
      * 3. Password Strength, Checklist, and Character Counter
