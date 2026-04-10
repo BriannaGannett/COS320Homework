@@ -100,14 +100,14 @@ input[type="password"] {
 /* DESKTOP WIDE LAYOUT (1024px and up) */
 @media (min-width: 1024px) {
     main {
-        width: 70%; /* Slightly narrower for better line-length readability */
+        width: 80%; /* Slightly longre because you said to */
         max-width: 1000px;
     }
 
     /* OPTIONAL: Split identity section into two columns on wide screens */
     .identity-fields {
         display: grid;
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 20px;
     }
 }
