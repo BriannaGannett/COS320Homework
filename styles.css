@@ -49,6 +49,10 @@ label {
     width: 100%;
 }
 
+.error-message {
+    color: #e53e3e;
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
