@@ -111,6 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
         input.addEventListener('input', () => {
             const errorSpan = document.getElementById(`${input.id}-error`);
             const isValid = input.checkValidity();
+            const inputField = document.getElementById(input.id);
             
             input.classList.toggle('invalid', !isValid);
             input.classList.toggle('valid', isValid);
@@ -118,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (errorSpan) {
                 errorSpan.textContent = isValid ? '' : input.validationMessage;
                 errorSpan.style.display = isValid ? 'none' : 'block';
+                inputField.style.outlineColor = isValid ? '#22c55e' : '#ef4444';
             }
         });
     });
